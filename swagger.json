@@ -9421,7 +9421,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Prefix"
+              "$ref": "#/definitions/PrefixCreateUpdate"
             }
           }
         ],
@@ -9465,7 +9465,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Prefix"
+              "$ref": "#/definitions/PrefixCreateUpdate"
             }
           }
         ],
@@ -9490,7 +9490,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Prefix"
+              "$ref": "#/definitions/PrefixCreateUpdate"
             }
           }
         ],
@@ -16655,6 +16655,81 @@
         }
       }
     },
+    "PrefixCreateUpdate": {
+      "required": [
+        "prefix"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "family": {
+          "title": "Family",
+          "type": "integer",
+          "readOnly": true
+        },
+        "prefix": {
+          "title": "Prefix",
+          "description": "IPv4 or IPv6 network with mask",
+          "type": "string"
+        },
+        "site": {
+          "type": "integer"
+        },
+        "vrf": {
+          "type": "integer"
+        },
+        "tenant": {
+          "type": "integer"
+        },
+        "vlan": {
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "integer"
+        },
+        "role": {
+          "type": "integer"
+        },
+        "is_pool": {
+          "title": "Is a pool",
+          "description": "All IP addresses within this prefix are considered usable",
+          "type": "boolean"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "RIR": {
       "required": [
         "name",
