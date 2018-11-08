@@ -11788,7 +11788,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Tenant"
+              "$ref": "#/definitions/TenantCreateUpdate"
             }
           }
         ],
@@ -11832,7 +11832,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Tenant"
+              "$ref": "#/definitions/TenantCreateUpdate"
             }
           }
         ],
@@ -17206,6 +17206,70 @@
         }
       }
     },
+    "TenantCreateUpdate": {
+      "required": [
+        "name",
+        "slug"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 30,
+          "minLength": 1
+        },
+        "slug": {
+          "title": "Slug",
+          "type": "string",
+          "format": "slug",
+          "pattern": "^[-a-zA-Z0-9_]+$",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "group": {
+          "type": "integer"          
+        },
+        "description": {
+          "title": "Description",
+          "description": "Long-form name (optional)",
+          "type": "string",
+          "maxLength": 100
+        },
+        "comments": {
+          "title": "Comments",
+          "type": "string"
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "ClusterGroup": {
       "required": [
         "name",
