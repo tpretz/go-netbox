@@ -10856,7 +10856,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VRF"
+              "$ref": "#/definitions/VRFCreateUpdate"
             }
           }
         ],
@@ -10900,7 +10900,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VRF"
+              "$ref": "#/definitions/VRFCreateUpdate"
             }
           }
         ],
@@ -10925,7 +10925,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VRF"
+              "$ref": "#/definitions/VRFCreateUpdate"
             }
           }
         ],
@@ -16956,6 +16956,73 @@
         }
       }
     },
+    "VRFCreateUpdate": {
+      "required": [
+        "name",
+        "rd"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "rd": {
+          "title": "Route distinguisher",
+          "type": "string",
+          "maxLength": 21,
+          "minLength": 1
+        },
+        "tenant": {
+          "type": "integer"
+        },
+        "enforce_unique": {
+          "title": "Enforce unique space",
+          "description": "Prevent duplicate prefixes/IP addresses within this VRF",
+          "type": "boolean"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "display_name": {
+          "title": "Display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "SecretRole": {
       "required": [
         "name",
