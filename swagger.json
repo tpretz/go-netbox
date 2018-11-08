@@ -9107,7 +9107,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPAddress"
+              "$ref": "#/definitions/IPAddressCreateUpdate"
             }
           }
         ],
@@ -9151,7 +9151,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPAddress"
+              "$ref": "#/definitions/IPAddressCreateUpdate"
             }
           }
         ],
@@ -9176,7 +9176,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPAddress"
+              "$ref": "#/definitions/IPAddressCreateUpdate"
             }
           }
         ],
@@ -16495,6 +16495,80 @@
         }
       }
     },
+    "IPAddressCreateUpdate": {
+      "required": [
+        "address"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "family": {
+          "title": "Family",
+          "type": "integer",
+          "readOnly": true
+        },
+        "address": {
+          "title": "Address",
+          "description": "IPv4 or IPv6 address (with mask)",
+          "type": "string"
+        },
+        "vrf": {
+          "type": "integer"
+        },
+        "tenant": {
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "integer"
+        },
+        "interface": {
+          "$ref": "#/definitions/IPAddressInterface"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "nat_inside": {
+          "type": "integer"
+        },
+        "nat_outside": {
+          "type": "integer"
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+          "items": {
+            "type": "string"
+		      }
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "NestedVLAN": {
       "title": "Vlan",
       "required": [
