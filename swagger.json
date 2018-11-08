@@ -13423,7 +13423,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -13682,7 +13685,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -13759,7 +13765,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -14164,7 +14173,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -14256,7 +14268,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -14334,7 +14349,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -14387,7 +14405,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -14533,7 +14554,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -14688,7 +14712,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -14852,7 +14879,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -15003,7 +15033,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -15058,7 +15091,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -15385,7 +15421,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -15581,7 +15620,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -15647,7 +15689,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         }
       }
     },
@@ -16145,7 +16190,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -16361,7 +16409,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -16518,7 +16569,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -16807,7 +16861,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "display_name": {
           "title": "Display name",
@@ -16871,7 +16928,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "display_name": {
           "title": "Display name",
@@ -16996,7 +17056,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -17120,7 +17183,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -17299,7 +17365,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -17431,7 +17500,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
@@ -17533,7 +17605,10 @@
         },
         "tags": {
           "title": "Tags",
-          "type": "string"
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
         },
         "custom_fields": {
           "title": "Custom fields",
