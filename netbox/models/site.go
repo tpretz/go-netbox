@@ -41,6 +41,7 @@ type Site struct {
 
 	// Contact E-mail
 	// Max Length: 254
+	// Format: email
 	ContactEmail strfmt.Email `json:"contact_email,omitempty"`
 
 	// Contact name
@@ -73,6 +74,7 @@ type Site struct {
 
 	// Created
 	// Read Only: true
+	// Format: date
 	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
@@ -92,11 +94,19 @@ type Site struct {
 
 	// Last updated
 	// Read Only: true
+	// Format: date-time
 	LastUpdated strfmt.DateTime `json:"last_updated,omitempty"`
+
+	// Latitude
+	Latitude string `json:"latitude,omitempty"`
+
+	// Longitude
+	Longitude string `json:"longitude,omitempty"`
 
 	// Name
 	// Required: true
 	// Max Length: 50
+	// Min Length: 1
 	Name *string `json:"name"`
 
 	// Physical address
@@ -104,8 +114,7 @@ type Site struct {
 	PhysicalAddress string `json:"physical_address,omitempty"`
 
 	// region
-	// Required: true
-	Region *NestedRegion `json:"region"`
+	Region *NestedRegion `json:"region,omitempty"`
 
 	// Shipping address
 	// Max Length: 200
@@ -114,16 +123,18 @@ type Site struct {
 	// Slug
 	// Required: true
 	// Max Length: 50
+	// Min Length: 1
 	// Pattern: ^[-a-zA-Z0-9_]+$
 	Slug *string `json:"slug"`
 
 	// status
-	// Required: true
-	Status *SiteStatus `json:"status"`
+	Status *SiteStatus `json:"status,omitempty"`
+
+	// Tags
+	Tags string `json:"tags,omitempty"`
 
 	// tenant
-	// Required: true
-	Tenant *NestedTenant `json:"tenant"`
+	Tenant *NestedTenant `json:"tenant,omitempty"`
 
 	// Time zone
 	TimeZone string `json:"time_zone,omitempty"`
@@ -134,67 +145,62 @@ func (m *Site) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAsn(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateContactEmail(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateContactName(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateContactPhone(formats); err != nil {
-		// prop
+		res = append(res, err)
+	}
+
+	if err := m.validateCreated(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateDescription(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateFacility(formats); err != nil {
-		// prop
+		res = append(res, err)
+	}
+
+	if err := m.validateLastUpdated(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validatePhysicalAddress(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateRegion(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateShippingAddress(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateSlug(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateStatus(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateTenant(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
@@ -264,6 +270,19 @@ func (m *Site) validateContactPhone(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Site) validateCreated(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Created) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Site) validateDescription(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Description) { // not required
@@ -290,9 +309,26 @@ func (m *Site) validateFacility(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Site) validateLastUpdated(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.LastUpdated) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("last_updated", "body", "date-time", m.LastUpdated.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Site) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("name", "body", string(*m.Name), 1); err != nil {
 		return err
 	}
 
@@ -318,12 +354,11 @@ func (m *Site) validatePhysicalAddress(formats strfmt.Registry) error {
 
 func (m *Site) validateRegion(formats strfmt.Registry) error {
 
-	if err := validate.Required("region", "body", m.Region); err != nil {
-		return err
+	if swag.IsZero(m.Region) { // not required
+		return nil
 	}
 
 	if m.Region != nil {
-
 		if err := m.Region.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("region")
@@ -354,6 +389,10 @@ func (m *Site) validateSlug(formats strfmt.Registry) error {
 		return err
 	}
 
+	if err := validate.MinLength("slug", "body", string(*m.Slug), 1); err != nil {
+		return err
+	}
+
 	if err := validate.MaxLength("slug", "body", string(*m.Slug), 50); err != nil {
 		return err
 	}
@@ -367,12 +406,11 @@ func (m *Site) validateSlug(formats strfmt.Registry) error {
 
 func (m *Site) validateStatus(formats strfmt.Registry) error {
 
-	if err := validate.Required("status", "body", m.Status); err != nil {
-		return err
+	if swag.IsZero(m.Status) { // not required
+		return nil
 	}
 
 	if m.Status != nil {
-
 		if err := m.Status.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")
@@ -386,12 +424,11 @@ func (m *Site) validateStatus(formats strfmt.Registry) error {
 
 func (m *Site) validateTenant(formats strfmt.Registry) error {
 
-	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
-		return err
+	if swag.IsZero(m.Tenant) { // not required
+		return nil
 	}
 
 	if m.Tenant != nil {
-
 		if err := m.Tenant.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tenant")
@@ -414,6 +451,73 @@ func (m *Site) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *Site) UnmarshalBinary(b []byte) error {
 	var res Site
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// SiteStatus Status
+// swagger:model SiteStatus
+type SiteStatus struct {
+
+	// label
+	// Required: true
+	Label *string `json:"label"`
+
+	// value
+	// Required: true
+	Value *int64 `json:"value"`
+}
+
+// Validate validates this site status
+func (m *SiteStatus) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLabel(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SiteStatus) validateLabel(formats strfmt.Registry) error {
+
+	if err := validate.Required("status"+"."+"label", "body", m.Label); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SiteStatus) validateValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("status"+"."+"value", "body", m.Value); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SiteStatus) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SiteStatus) UnmarshalBinary(b []byte) error {
+	var res SiteStatus
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

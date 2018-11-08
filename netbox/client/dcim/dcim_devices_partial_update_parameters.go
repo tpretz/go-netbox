@@ -32,7 +32,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/digitalocean/go-netbox/netbox/models"
+	models "github.com/Preskton/go-netbox/netbox/models"
 )
 
 // NewDcimDevicesPartialUpdateParams creates a new DcimDevicesPartialUpdateParams object
@@ -80,7 +80,7 @@ for the dcim devices partial update operation typically these are written to a h
 type DcimDevicesPartialUpdateParams struct {
 
 	/*Data*/
-	Data *models.WritableDevice
+	Data *models.Device
 	/*ID
 	  A unique integer value identifying this device.
 
@@ -126,13 +126,13 @@ func (o *DcimDevicesPartialUpdateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithData adds the data to the dcim devices partial update params
-func (o *DcimDevicesPartialUpdateParams) WithData(data *models.WritableDevice) *DcimDevicesPartialUpdateParams {
+func (o *DcimDevicesPartialUpdateParams) WithData(data *models.Device) *DcimDevicesPartialUpdateParams {
 	o.SetData(data)
 	return o
 }
 
 // SetData adds the data to the dcim devices partial update params
-func (o *DcimDevicesPartialUpdateParams) SetData(data *models.WritableDevice) {
+func (o *DcimDevicesPartialUpdateParams) SetData(data *models.Device) {
 	o.Data = data
 }
 
