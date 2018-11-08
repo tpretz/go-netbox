@@ -32,7 +32,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/digitalocean/go-netbox/netbox/models"
+	models "github.com/Preskton/go-netbox/netbox/models"
 )
 
 // NewVirtualizationVirtualMachinesUpdateParams creates a new VirtualizationVirtualMachinesUpdateParams object
@@ -80,7 +80,7 @@ for the virtualization virtual machines update operation typically these are wri
 type VirtualizationVirtualMachinesUpdateParams struct {
 
 	/*Data*/
-	Data *models.WritableVirtualMachine
+	Data *models.VirtualMachine
 	/*ID
 	  A unique integer value identifying this virtual machine.
 
@@ -126,13 +126,13 @@ func (o *VirtualizationVirtualMachinesUpdateParams) SetHTTPClient(client *http.C
 }
 
 // WithData adds the data to the virtualization virtual machines update params
-func (o *VirtualizationVirtualMachinesUpdateParams) WithData(data *models.WritableVirtualMachine) *VirtualizationVirtualMachinesUpdateParams {
+func (o *VirtualizationVirtualMachinesUpdateParams) WithData(data *models.VirtualMachine) *VirtualizationVirtualMachinesUpdateParams {
 	o.SetData(data)
 	return o
 }
 
 // SetData adds the data to the virtualization virtual machines update params
-func (o *VirtualizationVirtualMachinesUpdateParams) SetData(data *models.WritableVirtualMachine) {
+func (o *VirtualizationVirtualMachinesUpdateParams) SetData(data *models.VirtualMachine) {
 	o.Data = data
 }
 

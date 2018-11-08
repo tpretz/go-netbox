@@ -34,6 +34,7 @@ import (
 type PowerPort struct {
 
 	// Connection status
+	// Enum: [false true]
 	ConnectionStatus bool `json:"connection_status,omitempty"`
 
 	// device
@@ -47,11 +48,14 @@ type PowerPort struct {
 	// Name
 	// Required: true
 	// Max Length: 50
+	// Min Length: 1
 	Name *string `json:"name"`
 
 	// power outlet
-	// Required: true
-	PowerOutlet *PowerOutlet `json:"power_outlet"`
+	PowerOutlet *NestedPowerOutlet `json:"power_outlet,omitempty"`
+
+	// Tags
+	Tags string `json:"tags,omitempty"`
 }
 
 // Validate validates this power port
@@ -59,22 +63,18 @@ func (m *PowerPort) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateConnectionStatus(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateDevice(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validatePowerOutlet(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
@@ -125,7 +125,6 @@ func (m *PowerPort) validateDevice(formats strfmt.Registry) error {
 	}
 
 	if m.Device != nil {
-
 		if err := m.Device.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("device")
@@ -143,6 +142,10 @@ func (m *PowerPort) validateName(formats strfmt.Registry) error {
 		return err
 	}
 
+	if err := validate.MinLength("name", "body", string(*m.Name), 1); err != nil {
+		return err
+	}
+
 	if err := validate.MaxLength("name", "body", string(*m.Name), 50); err != nil {
 		return err
 	}
@@ -152,12 +155,11 @@ func (m *PowerPort) validateName(formats strfmt.Registry) error {
 
 func (m *PowerPort) validatePowerOutlet(formats strfmt.Registry) error {
 
-	if err := validate.Required("power_outlet", "body", m.PowerOutlet); err != nil {
-		return err
+	if swag.IsZero(m.PowerOutlet) { // not required
+		return nil
 	}
 
 	if m.PowerOutlet != nil {
-
 		if err := m.PowerOutlet.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("power_outlet")

@@ -31,17 +31,26 @@ import (
 // swagger:model NestedInterface
 type NestedInterface struct {
 
+	// device
+	Device *NestedDevice `json:"device,omitempty"`
+
 	// ID
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
+	// Is connected
+	// Read Only: true
+	IsConnected string `json:"is_connected,omitempty"`
+
 	// Name
 	// Required: true
 	// Max Length: 64
+	// Min Length: 1
 	Name *string `json:"name"`
 
 	// Url
 	// Read Only: true
+	// Format: uri
 	URL strfmt.URI `json:"url,omitempty"`
 }
 
@@ -49,8 +58,15 @@ type NestedInterface struct {
 func (m *NestedInterface) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDevice(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
-		// prop
+		res = append(res, err)
+	}
+
+	if err := m.validateURL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -60,13 +76,48 @@ func (m *NestedInterface) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *NestedInterface) validateDevice(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Device) { // not required
+		return nil
+	}
+
+	if m.Device != nil {
+		if err := m.Device.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("device")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *NestedInterface) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
 	}
 
+	if err := validate.MinLength("name", "body", string(*m.Name), 1); err != nil {
+		return err
+	}
+
 	if err := validate.MaxLength("name", "body", string(*m.Name), 64); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NestedInterface) validateURL(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.URL) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("url", "body", "uri", m.URL.String(), formats); err != nil {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PowerOutlet Power outlet
+// PowerOutlet power outlet
 // swagger:model PowerOutlet
 type PowerOutlet struct {
 
@@ -46,7 +46,11 @@ type PowerOutlet struct {
 	// Name
 	// Required: true
 	// Max Length: 50
+	// Min Length: 1
 	Name *string `json:"name"`
+
+	// Tags
+	Tags string `json:"tags,omitempty"`
 }
 
 // Validate validates this power outlet
@@ -54,12 +58,10 @@ func (m *PowerOutlet) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDevice(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
-		// prop
 		res = append(res, err)
 	}
 
@@ -76,7 +78,6 @@ func (m *PowerOutlet) validateDevice(formats strfmt.Registry) error {
 	}
 
 	if m.Device != nil {
-
 		if err := m.Device.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("device")
@@ -91,6 +92,10 @@ func (m *PowerOutlet) validateDevice(formats strfmt.Registry) error {
 func (m *PowerOutlet) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("name", "body", string(*m.Name), 1); err != nil {
 		return err
 	}
 
