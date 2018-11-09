@@ -16531,7 +16531,7 @@
           "type": "integer"
         },
         "interface": {
-          "$ref": "#/definitions/IPAddressInterface"
+          "type": "integer"
         },
         "description": {
           "title": "Description",

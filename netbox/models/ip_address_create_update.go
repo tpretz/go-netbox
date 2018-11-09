@@ -58,7 +58,7 @@ type IPAddressCreateUpdate struct {
 	ID int64 `json:"id,omitempty"`
 
 	// interface
-	Interface *IPAddressInterface `json:"interface,omitempty"`
+	Interface int64 `json:"interface,omitempty"`
 
 	// Last updated
 	// Read Only: true
@@ -103,10 +103,6 @@ func (m *IPAddressCreateUpdate) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateInterface(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastUpdated(formats); err != nil {
 		res = append(res, err)
 	}
@@ -147,24 +143,6 @@ func (m *IPAddressCreateUpdate) validateDescription(formats strfmt.Registry) err
 
 	if err := validate.MaxLength("description", "body", string(m.Description), 100); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *IPAddressCreateUpdate) validateInterface(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Interface) { // not required
-		return nil
-	}
-
-	if m.Interface != nil {
-		if err := m.Interface.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("interface")
-			}
-			return err
-		}
 	}
 
 	return nil
