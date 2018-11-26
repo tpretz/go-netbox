@@ -8807,7 +8807,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Aggregate"
+              "$ref": "#/definitions/AggregateCreateUpdate"
             }
           }
         ],
@@ -8851,7 +8851,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Aggregate"
+              "$ref": "#/definitions/AggregateCreateUpdate"
             }
           }
         ],
@@ -8876,7 +8876,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Aggregate"
+              "$ref": "#/definitions/AggregateCreateUpdate"
             }
           }
         ],
@@ -9107,7 +9107,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPAddress"
+              "$ref": "#/definitions/IPAddressCreateUpdate"
             }
           }
         ],
@@ -9151,7 +9151,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPAddress"
+              "$ref": "#/definitions/IPAddressCreateUpdate"
             }
           }
         ],
@@ -9176,7 +9176,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPAddress"
+              "$ref": "#/definitions/IPAddressCreateUpdate"
             }
           }
         ],
@@ -9421,7 +9421,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Prefix"
+              "$ref": "#/definitions/PrefixCreateUpdate"
             }
           }
         ],
@@ -9465,7 +9465,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Prefix"
+              "$ref": "#/definitions/PrefixCreateUpdate"
             }
           }
         ],
@@ -9490,7 +9490,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Prefix"
+              "$ref": "#/definitions/PrefixCreateUpdate"
             }
           }
         ],
@@ -10856,7 +10856,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VRF"
+              "$ref": "#/definitions/VRFCreateUpdate"
             }
           }
         ],
@@ -10900,7 +10900,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VRF"
+              "$ref": "#/definitions/VRFCreateUpdate"
             }
           }
         ],
@@ -10925,7 +10925,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VRF"
+              "$ref": "#/definitions/VRFCreateUpdate"
             }
           }
         ],
@@ -16213,6 +16213,69 @@
         }
       }
     },
+    "AggregateCreateUpdate": {
+      "required": [
+        "prefix",
+        "rir"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "family": {
+          "title": "Family",
+          "type": "integer",
+          "enum": [
+            4,
+            6
+          ],
+          "readOnly": true
+        },
+        "prefix": {
+          "title": "Prefix",
+          "type": "string"
+        },
+        "rir": {
+          "type": "integer"
+        },
+        "date_added": {
+          "title": "Date added",
+          "type": "string",
+          "format": "date"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "NestedVRF": {
       "title": "Vrf",
       "required": [
@@ -16432,6 +16495,80 @@
         }
       }
     },
+    "IPAddressCreateUpdate": {
+      "required": [
+        "address"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "family": {
+          "title": "Family",
+          "type": "integer",
+          "readOnly": true
+        },
+        "address": {
+          "title": "Address",
+          "description": "IPv4 or IPv6 address (with mask)",
+          "type": "string"
+        },
+        "vrf": {
+          "type": "integer"
+        },
+        "tenant": {
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "integer"
+        },
+        "interface": {
+          "type": "integer"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "nat_inside": {
+          "type": "integer"
+        },
+        "nat_outside": {
+          "type": "integer"
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+          "items": {
+            "type": "string"
+		      }
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "NestedVLAN": {
       "title": "Vlan",
       "required": [
@@ -16592,6 +16729,81 @@
         }
       }
     },
+    "PrefixCreateUpdate": {
+      "required": [
+        "prefix"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "family": {
+          "title": "Family",
+          "type": "integer",
+          "readOnly": true
+        },
+        "prefix": {
+          "title": "Prefix",
+          "description": "IPv4 or IPv6 network with mask",
+          "type": "string"
+        },
+        "site": {
+          "type": "integer"
+        },
+        "vrf": {
+          "type": "integer"
+        },
+        "tenant": {
+          "type": "integer"
+        },
+        "vlan": {
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "integer"
+        },
+        "role": {
+          "type": "integer"
+        },
+        "is_pool": {
+          "title": "Is a pool",
+          "description": "All IP addresses within this prefix are considered usable",
+          "type": "boolean"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+		  "items": {
+			"type": "string"
+		  }
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "RIR": {
       "required": [
         "name",
@@ -16956,6 +17168,73 @@
         }
       }
     },
+    "VRFCreateUpdate": {
+      "required": [
+        "name",
+        "rd"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "rd": {
+          "title": "Route distinguisher",
+          "type": "string",
+          "maxLength": 21,
+          "minLength": 1
+        },
+        "tenant": {
+          "type": "integer"
+        },
+        "enforce_unique": {
+          "title": "Enforce unique space",
+          "description": "Prevent duplicate prefixes/IP addresses within this VRF",
+          "type": "boolean"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "maxLength": 100
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "display_name": {
+          "title": "Display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "custom_fields": {
+          "title": "Custom fields",
+          "type": "object"
+        },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "last_updated": {
+          "title": "Last updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },    
     "SecretRole": {
       "required": [
         "name",
