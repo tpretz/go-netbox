@@ -32,7 +32,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/Preskton/go-netbox/netbox/models"
+	models "github.com/tpretz/go-netbox/netbox/models"
 )
 
 // NewIPAMRolesUpdateParams creates a new IPAMRolesUpdateParams object

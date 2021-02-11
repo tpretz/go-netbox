@@ -27,7 +27,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/Preskton/go-netbox/netbox/models"
+	models "github.com/tpretz/go-netbox/netbox/models"
 )
 
 // VirtualizationInterfacesReadReader is a Reader for the VirtualizationInterfacesRead structure.
